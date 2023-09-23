@@ -75,6 +75,7 @@
     .container {
       padding: 60px 0 40px 25px;
       display: flex;
+      justify-content: center;
     }
 
     dl {
