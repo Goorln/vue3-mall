@@ -6,7 +6,7 @@
   <header class='app-header'>
     <div class="container">
       <h1 class="logo">
-        <RouterLink to="/">小兔鲜</RouterLink>
+        <RouterLink to="/">乐宁檬儿</RouterLink>
       </h1>
       <ul class="app-header-nav">
         <li class="home">
@@ -23,7 +23,7 @@
         </li>
       </ul>
       <div class="search">
-        <i class="iconfont icon-search"></i>
+        <i class="iconfont icon-sousuo"></i>
         <input type="text" placeholder="搜一搜">
       </div>
       <!-- 头部购物车 -->
