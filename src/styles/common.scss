@@ -23,9 +23,10 @@ div {
 body {
     // background: #fff;
     color: #333;
+    background-color: #f5f5f5;
     font-size: 12px;
     // margin-top: 5px;
-    font-family: "SimSun", "宋体", "Arial Narrow";
+    font-family: "Gill Sans Extrabold", "sans-serif";
 }
 
 ul,
@@ -48,6 +49,11 @@ a {
     color: #000;
     text-decoration: none;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}
+
 
 // a:link {
 //     color: #000;
