@@ -15,3 +15,11 @@ import homeProduct from './components/HomeProduct.vue'
   <HomeHot />
   <homeProduct />
 </template>
+
+<style scope lang="scss">
+.container {
+  position: relative;
+  width: 1240px;
+  margin: 0 auto;
+}
+</style>
