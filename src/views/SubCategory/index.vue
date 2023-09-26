@@ -9,8 +9,10 @@ const route = useRoute()
 const breadcrumbData = ref({})
 const getCategory = async () => {
   const res = await getCategoryFilterAPI(route.params.id)
+  // console.log(res);
   breadcrumbData.value = res.result
 }
+onMounted(() => getCategory())
 //获取基础列表数据
 const subCategoryData = ref([])
 const reqParams = ref({
@@ -21,11 +23,11 @@ const reqParams = ref({
 })
 const getSubCategory = async () => {
   const res = await getSubCategoryAPI(reqParams.value)
-  console.log(res);
+  // console.log(res);
   subCategoryData.value = res.result.items
 }
 
-onMounted(() => getCategory(), getSubCategory())
+onMounted(() => getSubCategory())
 
 </script>
 
