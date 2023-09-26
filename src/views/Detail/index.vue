@@ -1,6 +1,7 @@
 
 import { breakpointsAntDesign } from '@vueuse/core';
 <script setup>
+import DetailHot from "./components/DetailHot.vue";
 import { ref, onMounted } from "vue";
 import { getGoodsDetailAPI } from "@/apis/goods";
 import { useRoute } from 'vue-router'
@@ -13,6 +14,7 @@ const getGoodsData = async () => {
   goodsData.value = res.result
 }
 onMounted(() => getGoodsData())
+
 </script>
 
 <template>
@@ -57,9 +59,9 @@ onMounted(() => getGoodsData())
                   <p>{{goodsData.collectCount}}+</p>
                   <p><i class="iconfont icon-favorite-filling"></i>收藏商品</p>
                 </li>
-                <li v-if="goodsData.brand">
+                <li>
                   <p>品牌信息</p>
-                  <p>{{ goodsData.brand.name }}</p>
+                  <p>{{ goodsData.brand?.name }}</p>
                   <p><i class="iconfont icon-dynamic-filling"></i>品牌主页</p>
                 </li>
               </ul>
@@ -109,20 +111,21 @@ onMounted(() => getGoodsData())
                 </nav>
                 <div class="goods-detail">
                   <!-- 属性 -->
-                  <ul class="attrs" v-if="goodsData.details">
-                    <li v-for="item in goodsData.details.properties" :key="item.value">
+                  <ul class="attrs">
+                    <li v-for="item in goodsData.details?.properties" :key="item.value">
                       <span class="dt">{{ item.name }}</span>
                       <span class="dd">{{ item.value }}</span>
                     </li>
                   </ul>
                   <!-- 图片 -->
-                  <img v-for="ite in goodsData.details.pictures" :key="ite" :src="ite" alt="" />
+                  <img v-for="item in goodsData.details?.pictures" :key="item" :src="item" alt="" />
                 </div>
               </div>
             </div>
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
-
+              <DetailHot :hot-type="1" />
+              <DetailHot :hot-type="2" />
             </div>
           </div>
         </div>
