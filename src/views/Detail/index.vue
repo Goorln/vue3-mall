@@ -1,6 +1,18 @@
+
+import { breakpointsAntDesign } from '@vueuse/core';
 <script setup>
+import { ref, onMounted } from "vue";
+import { getGoodsDetailAPI } from "@/apis/goods";
+import { useRoute } from 'vue-router'
 
-
+const goodsData = ref({})
+const route = useRoute()
+const getGoodsData = async () => {
+  const res = await getGoodsDetailAPI(route.params.id)
+  // console.log(res);
+  goodsData.value = res.result
+}
+onMounted(() => getGoodsData())
 </script>
 
 <template>
@@ -9,9 +21,14 @@
       <div class="bread-container">
         <el-breadcrumb separator=">">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/' }">母婴
+          <!-- 
+            错误原因：goodsData刚开始是{}空对象，{}.categories -> undefined -> undefined[1]
+            1. 可选链的语法：?.
+            2. v-if手动控制渲染时机，保证只有数据存在才渲染  给container加 v-if="goodsData.details"
+           -->
+          <el-breadcrumb-item :to="{ path: `/category/${goodsData.categories?.[1].id}` }">{{ goodsData.categories?.[1].name }}
           </el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/' }">跑步鞋
+          <el-breadcrumb-item :to="{ path: `/category/sub/${goodsData.categories?.[0].id}` }">{{ goodsData.categories?.[0].name }}
           </el-breadcrumb-item>
           <el-breadcrumb-item>抓绒保暖，毛毛虫子儿童运动鞋</el-breadcrumb-item>
         </el-breadcrumb>
@@ -27,33 +44,33 @@
               <ul class="goods-sales">
                 <li>
                   <p>销量人气</p>
-                  <p> 100+ </p>
+                  <p>{{goodsData.salesCount}}+ </p>
                   <p><i class="iconfont icon-task-filling"></i>销量人气</p>
                 </li>
                 <li>
                   <p>商品评价</p>
-                  <p>200+</p>
+                  <p>{{goodsData.commentCount}}+</p>
                   <p><i class="iconfont icon-comment-filling"></i>查看评价</p>
                 </li>
                 <li>
                   <p>收藏人气</p>
-                  <p>300+</p>
+                  <p>{{goodsData.collectCount}}+</p>
                   <p><i class="iconfont icon-favorite-filling"></i>收藏商品</p>
                 </li>
-                <li>
+                <li v-if="goodsData.brand">
                   <p>品牌信息</p>
-                  <p>400+</p>
+                  <p>{{ goodsData.brand.name }}</p>
                   <p><i class="iconfont icon-dynamic-filling"></i>品牌主页</p>
                 </li>
               </ul>
             </div>
             <div class="spec">
               <!-- 商品信息区 -->
-              <p class="g-name"> 抓绒保暖，毛毛虫儿童鞋 </p>
-              <p class="g-desc">好穿 </p>
+              <p class="g-name"> {{ goodsData.name }} </p>
+              <p class="g-desc">{{ goodsData.desc }} </p>
               <p class="g-price">
-                <span>200</span>
-                <span> 100</span>
+                <span>{{ goodsData.oldPrice }}</span>
+                <span> {{ goodsData.price }}</span>
               </p>
               <div class="g-service">
                 <dl>
@@ -92,14 +109,14 @@
                 </nav>
                 <div class="goods-detail">
                   <!-- 属性 -->
-                  <ul class="attrs">
-                    <li v-for="item in 3" :key="item.value">
-                      <span class="dt">白色</span>
-                      <span class="dd">纯棉</span>
+                  <ul class="attrs" v-if="goodsData.details">
+                    <li v-for="item in goodsData.details.properties" :key="item.value">
+                      <span class="dt">{{ item.name }}</span>
+                      <span class="dd">{{ item.value }}</span>
                     </li>
                   </ul>
                   <!-- 图片 -->
-
+                  <img v-for="ite in goodsData.details.pictures" :key="ite" :src="ite" alt="" />
                 </div>
               </div>
             </div>
