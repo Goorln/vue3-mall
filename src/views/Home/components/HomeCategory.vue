@@ -14,7 +14,7 @@ const categoryStore = useCategoryStore()
           <h4>分类推荐 <small>根据您的购买或浏览记录推荐</small></h4>
           <ul>
             <li v-for="it in item.goods" :key="it.id">
-              <RouterLink to="/">
+              <RouterLink :to="`/detail/${item.id}`">
                 <img :src="it.picture" :alt="it.desc" />
                 <div class="info">
                   <p class="name ellipsis-2">
