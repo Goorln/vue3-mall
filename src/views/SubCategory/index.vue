@@ -26,8 +26,13 @@ const getSubCategory = async () => {
   // console.log(res);
   subCategoryData.value = res.result.items
 }
-
 onMounted(() => getSubCategory())
+// tab切换
+const tabChange = () => {
+  // console.log(reqParams.value.sortField);
+  reqParams.value.page = 1
+  getSubCategory()
+}
 
 </script>
 
@@ -43,7 +48,7 @@ onMounted(() => getSubCategory())
       </el-breadcrumb>
     </div>
     <div class="sub-container">
-      <el-tabs>
+      <el-tabs v-model="reqParams.sortField" @tab-change="tabChange">
         <el-tab-pane label="最新商品" name="publishTime"></el-tab-pane>
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
