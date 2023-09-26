@@ -1,9 +1,14 @@
 import httpInstance from "@/utils/http";
 
 // 轮播图接口
-export function getHomeBannerAPI() {
+export function getHomeBannerAPI(params = {}) {
+    // 1为首页，2为商品
+    const { distributionSite = '1' } = params
     return httpInstance({
-        url: '/home/banner'
+        url: '/home/banner',
+        params: {
+            distributionSite
+        }
     })
 }
 
