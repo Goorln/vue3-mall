@@ -1,7 +1,6 @@
-
-import { breakpointsAntDesign } from '@vueuse/core';
 <script setup>
 import DetailHot from "./components/DetailHot.vue";
+import ImageView from "@/components/ImageView/index.vue";
 import { ref, onMounted } from "vue";
 import { getGoodsDetailAPI } from "@/apis/goods";
 import { useRoute } from 'vue-router'
@@ -41,7 +40,7 @@ onMounted(() => getGoodsData())
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-
+              <ImageView />
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
