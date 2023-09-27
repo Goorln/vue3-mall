@@ -105,7 +105,6 @@
       float: left;
       width: 92px;
       height: 92px;
-      padding-top: 10px;
       border: 1px solid #ededed;
 
       .iconfont {
