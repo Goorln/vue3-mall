@@ -1,9 +1,15 @@
 <script setup>
 import { ref } from 'vue'
+import { loginAPI } from '@/apis/user'
+import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
+import 'element-plus/theme-chalk/el-message.css'
+
 // 准备表单对象
+// heima282 hm#qd@23!
 const form = ref({
-  account: '',
-  password: '',
+  account: 'heima282',
+  password: 'hm#qd@23!',
   agree: true
 })
 //准备规则对象
@@ -26,6 +32,28 @@ const rules = {
     }
   }]
 }
+// 整个表单内容验证
+const formRef = ref(null)
+const router = useRouter()
+const doLogin = () => {
+  const { account, password } = form.value
+  formRef.value.validate(async (valid) => {
+    // valid 所有表单都通过校验 才为true
+    // console.log(valid);
+    if (valid) {
+      // login
+      const res = await loginAPI({ account, password })
+      console.log(res);
+      ElMessage({ type: 'success', message: '登录成功' })
+      router.replace('/')
+    }
+  })
+}
+
+
+// 1. 用户名和密码 只需要通过简单的配置（看文档的方式 - 复杂功能通过多个不同组件拆解）
+// 2. 同意协议  自定义规则  validator:(rule,value,callback)=>{}
+// 3. 统一校验  通过调用form实例的方法 validate -> true
 
 </script>
 
@@ -64,7 +92,7 @@ const rules = {
                     我已同意隐私条款和服务条款
                   </el-checkbox>
                 </el-form-item>
-                <el-button size="large" class="subBtn">点击登录</el-button>
+                <el-button size="large" class="subBtn" @click="doLogin">点击登录</el-button>
               </el-form>
             </div>
           </div>
