@@ -56,7 +56,7 @@
             <a href="javascript:;">搜索推荐</a>
             <a href="javascript:;">友情链接</a>
           </p>
-          <p>CopyRight © 乐宁檬儿</p>
+          <p>CopyRight © 樂寕檬兒</p>
         </div>
       </div>
     </div>
