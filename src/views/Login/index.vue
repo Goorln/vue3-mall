@@ -1,9 +1,10 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 // 准备表单对象
 const form = ref({
   account: '',
-  password: ''
+  password: '',
+  agree: true
 })
 //准备规则对象
 const rules = {
@@ -11,7 +12,19 @@ const rules = {
   password: [
     { required: true, message: '密码不能为空', trigger: 'blur' },
     { min: 6, max: 14, message: '密码为6-14个字符', trigger: 'blur' }
-  ]
+  ],
+  agree: [{
+    validator: (rule, value, callback) => {
+      //自定义校验逻辑
+      // value: 当前输入的数据
+      // callback: 校验函数 校验通过调用
+      // console.log(value);
+      //勾选就通过
+      if (value) { callback() } else {
+        callback(new Error('请勾选协议！'))
+      }
+    }
+  }]
 }
 
 </script>
@@ -37,21 +50,23 @@ const rules = {
           <a href="javascript:;">账户登录</a>
         </nav>
         <div class="account-box">
-          <div class="form">
-            <el-form ref="form" :model="form" :rules="rules" label-position="right" label-width="60px" status-icon>
-              <el-form-item label="账户" prop="account">
-                <el-input v-model="form.account" />
-              </el-form-item>
-              <el-form-item label="密码" prop="password">
-                <el-input v-model="form.password" />
-              </el-form-item>
-              <el-form-item label-width="22px">
-                <el-checkbox size="large">
-                  我已同意隐私条款和服务条款
-                </el-checkbox>
-              </el-form-item>
-              <el-button size="large" class="subBtn">点击登录</el-button>
-            </el-form>
+          <div class="account-box">
+            <div class="form">
+              <el-form ref="formRef" :model="form" :rules="rules" label-position="right" label-width="60px" status-icon>
+                <el-form-item prop="account" label="账户">
+                  <el-input v-model="form.account" />
+                </el-form-item>
+                <el-form-item prop="password" label="密码">
+                  <el-input v-model="form.password" />
+                </el-form-item>
+                <el-form-item prop="agree" label-width="22px">
+                  <el-checkbox size="large" v-model="form.agree">
+                    我已同意隐私条款和服务条款
+                  </el-checkbox>
+                </el-form-item>
+                <el-button size="large" class="subBtn">点击登录</el-button>
+              </el-form>
+            </div>
           </div>
         </div>
       </div>
