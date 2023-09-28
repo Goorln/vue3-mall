@@ -5,7 +5,7 @@ import request from "@/utils/http";
 export const insertCartAPI = ({ skuId, count }) => {
     return request({
         url: '/member/cart',
-        method: '',
+        method: 'POST',
         data: {
             skuId,
             count
@@ -16,5 +16,16 @@ export const insertCartAPI = ({ skuId, count }) => {
 export const findNewCartListAPI = () => {
     return request({
         url: '/member/cart'
+    })
+}
+
+// 删除购物车
+export const delCartAPI = (ids) => {
+    return request({
+        url: '/member/cart',
+        method: 'DELETE',
+        data: {
+            ids
+        }
     })
 }

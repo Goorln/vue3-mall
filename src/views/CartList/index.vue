@@ -1,5 +1,5 @@
 <script setup>
-import { useCartStore } from '@/stores/cart';
+import { useCartStore } from '@/stores/cartStore';
 const cartStore = useCartStore()
 const singleCheck = (i, selected) => {
   // store cartList 数组 无法知道要修改谁的选中状态

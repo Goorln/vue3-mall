@@ -2,7 +2,7 @@
 import DetailHot from "./components/DetailHot.vue";
 import { ref, onMounted } from "vue";
 import { getGoodsDetailAPI } from "@/apis/goods";
-import { useCartStore } from "@/stores/cart";
+import { useCartStore } from "@/stores/cartStore";
 import { useRoute } from 'vue-router'
 import { ElMessage } from "element-plus";
 
