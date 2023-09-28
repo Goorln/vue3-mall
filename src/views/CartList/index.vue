@@ -3,7 +3,7 @@ import { useCartStore } from '@/stores/cart';
 const cartStore = useCartStore()
 const singleCheck = (i, selected) => {
   // store cartList 数组 无法知道要修改谁的选中状态
-  console.log(i, selected);
+  // console.log(i, selected);
   cartStore.singleCheck(i.skuId, selected)
 }
 </script>
@@ -16,7 +16,7 @@ const singleCheck = (i, selected) => {
           <thead>
             <tr>
               <th width="120">
-                <el-checkbox />
+                <el-checkbox :model-value="cartStore.isAll" @change="cartStore.allCheck" />
               </th>
               <th width="400">商品信息</th>
               <th width="220">单价</th>
