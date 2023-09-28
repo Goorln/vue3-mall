@@ -10,10 +10,14 @@ import '@/styles/common.scss'
 import { lazyPlugin } from '@/directives'
 //引入全局组件插件
 import { componentPlugin } from '@/components'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 const app = createApp(App)
+const pinia = createPinia()
+//注册持久化插件
+pinia.use(piniaPluginPersistedstate)
 
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
 app.use(lazyPlugin)
 app.use(componentPlugin)
