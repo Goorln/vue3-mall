@@ -45,7 +45,7 @@ const doLogin = () => {
       // login
       // const res = await loginAPI({ account, password })
       // console.log(res);
-      userStore.getUserInfo({ account, password })
+      await userStore.getUserInfo({ account, password })
       ElMessage({ type: 'success', message: '登录成功' })
       router.replace('/')
     }
