@@ -1,7 +1,6 @@
 <script setup>
 import { useCartStore } from '@/stores/cart';
 const cartStore = useCartStore()
-console.log(cartStore.cartList);
 </script>
 
 <template>
@@ -26,7 +25,7 @@ console.log(cartStore.cartList);
               <p class="count">x{{ i.count }}</p>
             </div>
           </RouterLink>
-          <i class="iconfont icon-close-new" @click="store.delCart(i.skuId)"></i>
+          <i class="iconfont icon-close" @click="cartStore.delCart(i.skuId)"></i>
         </div>
 
       </div>
