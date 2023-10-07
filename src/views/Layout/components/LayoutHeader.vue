@@ -9,7 +9,7 @@ const categoryStore = useCategoryStore()
   <header class='app-header'>
     <div class="container">
       <h1 class="logo">
-        <RouterLink to="/">乐宁檬儿</RouterLink>
+        <RouterLink to="/">樂寜檬儿</RouterLink>
       </h1>
       <ul class="app-header-nav">
         <li class="home">
